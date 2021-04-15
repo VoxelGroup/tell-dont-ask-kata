@@ -1,8 +1,0 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=24cd5adb_002Db1a7_002D4103_002D8b74_002D234c6a10b446/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="OrderApprovalUseCaseTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::A820023A-0088-4ACA-A3A1-2EB9D19DBE1D::.NETCoreApp,Version=v3.1::Exeal.Katas.TellDontAsk.Tests.UseCase.OrderApprovalUseCaseTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::A820023A-0088-4ACA-A3A1-2EB9D19DBE1D::.NETCoreApp,Version=v3.1::Exeal.Katas.TellDontAsk.Tests.UseCase.OrderCreationUseCaseTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::A820023A-0088-4ACA-A3A1-2EB9D19DBE1D::.NETCoreApp,Version=v3.1::Exeal.Katas.TellDontAsk.Tests.UseCase.OrderShipmentUseCaseTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
