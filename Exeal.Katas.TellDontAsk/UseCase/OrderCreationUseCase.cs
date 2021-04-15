@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Exeal.Katas.TellDontAsk.Domain;
 using Exeal.Katas.TellDontAsk.Exception;
 using Exeal.Katas.TellDontAsk.Repository;
@@ -35,10 +36,10 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 }
                 else
                 {
-                    decimal unitaryTax = product.Price / 100M * product.Category.TaxPercentage;
-                    decimal unitaryTaxedAmount = product.Price + unitaryTax;
-                    decimal taxedAmount = unitaryTaxedAmount * itemRequest.Quantity;
-                    decimal taxAmount = unitaryTax * itemRequest.Quantity;
+                    decimal unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
+                    decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
+                    decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
+                    decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
                     OrderItem orderItem = new OrderItem();
                     orderItem.Product = product;
