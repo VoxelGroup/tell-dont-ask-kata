@@ -13,7 +13,7 @@ namespace Exeal.Katas.TellDontAsk.Domain
         public OrderStatus Status { get; set; }
         public int Id { get; set; }
 
-        public void Approve(OrderApprovalRequest request)
+        public void SetOrderStatus(OrderApprovalRequest request)
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
