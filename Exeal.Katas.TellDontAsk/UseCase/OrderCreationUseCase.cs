@@ -19,12 +19,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(SellItemsRequest request)
         {
-            Order order = new Order();
-            order.Status = OrderStatus.Created;
-            order.Items = new List<OrderItem>();
-            order.Currency = "EUR";
-            order.Total = 0M;
-            order.Tax = 0M;
+            Order order = new Order(OrderStatus.Created, "EUR");
 
             foreach (SellItemRequest itemRequest in request.Requests)
             {
@@ -34,23 +29,16 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 {
                     throw new UnknownProductException();
                 }
-                else
-                {
-                    decimal unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
-                    decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
-                    decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
-                    decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.Product = product;
-                    orderItem.Quantity = itemRequest.Quantity;
-                    orderItem.Tax = taxAmount;
-                    orderItem.TaxedAmount = taxedAmount;
-                    order.Items.Add(orderItem);
+                decimal unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
+                decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
+                decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
+                decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
-                    order.Total = order.Total + taxedAmount;
-                    order.Tax = order.Tax + taxAmount;
-                }
+                OrderItem orderItem = 
+                    new OrderItem(product, itemRequest.Quantity, taxAmount, taxedAmount);
+
+                order.AddItem(orderItem);
             }
 
             orderRepository.Save(order);
