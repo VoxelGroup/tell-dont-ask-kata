@@ -23,8 +23,6 @@ namespace Exeal.Katas.TellDontAsk.Domain
         }
 
         public void ApproveOrReject(bool approved)
-       
-
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
