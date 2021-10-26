@@ -1,0 +1,4 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=229933a5_002Dcecd_002D49a0_002D9a8a_002Dccdaa3340f71/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="OrderApprovalUseCaseTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="D:\Users\lbenedicto\Documents\Katas\tell-dont-ask-kata\Exeal.Katas.TellDontAsk.Tests" Presentation="&amp;lt;Exeal.Katas.TellDontAsk.Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
