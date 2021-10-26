@@ -15,7 +15,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
         {
             var order = orderRepository.GetById(request.OrderId);
 
-            order.SetOrderStatus(request);
+            order.ApproveOrReject(request.Approved);
 
             orderRepository.Save(order);
         }

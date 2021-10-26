@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Exeal.Katas.TellDontAsk.Exception;
-using Exeal.Katas.TellDontAsk.UseCase;
 
 namespace Exeal.Katas.TellDontAsk.Domain
 {
@@ -13,24 +12,24 @@ namespace Exeal.Katas.TellDontAsk.Domain
         public OrderStatus Status { get; set; }
         public int Id { get; set; }
 
-        public void SetOrderStatus(OrderApprovalRequest request)
+        public void ApproveOrReject(bool shouldApprove)
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
                 throw new ShippedOrdersCannotBeChangedException();
             }
 
-            if (request.Approved && Status.Equals(OrderStatus.Rejected))
+            if (shouldApprove && Status.Equals(OrderStatus.Rejected))
             {
                 throw new RejectedOrderCannotBeApprovedException();
             }
 
-            if (!request.Approved && Status.Equals(OrderStatus.Approved))
+            if (!shouldApprove && Status.Equals(OrderStatus.Approved))
             {
                 throw new ApprovedOrderCannotBeRejectedException();
             }
 
-            Status = request.Approved ? OrderStatus.Approved : OrderStatus.Rejected;
+            Status = shouldApprove ? OrderStatus.Approved : OrderStatus.Rejected;
         }
     }
 }
