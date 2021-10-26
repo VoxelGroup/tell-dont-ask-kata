@@ -20,11 +20,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
         public void Run(SellItemsRequest request)
         {
             Order order = new Order();
-            order.Status = OrderStatus.Created;
-            order.Items = new List<OrderItem>();
-            order.Currency = "EUR";
-            order.Total = 0M;
-            order.Tax = 0M;
+            
 
             foreach (SellItemRequest itemRequest in request.Requests)
             {

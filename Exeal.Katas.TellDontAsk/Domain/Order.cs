@@ -13,6 +13,15 @@ namespace Exeal.Katas.TellDontAsk.Domain
         public OrderStatus Status { get; set; }
         public int Id { get; set; }
 
+        public Order()
+        {
+            Status = OrderStatus.Created;
+            Items = new List<OrderItem>();
+            Currency = "EUR";
+            Total = 0M;
+            Tax = 0M;
+        }
+
         public void ApproveOrRejectOrder(bool approved)
         {
             if (Status.Equals(OrderStatus.Shipped))
