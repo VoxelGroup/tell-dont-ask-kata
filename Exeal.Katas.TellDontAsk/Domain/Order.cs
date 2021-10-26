@@ -22,7 +22,9 @@ namespace Exeal.Katas.TellDontAsk.Domain
             Tax = 0M;
         }
 
-        public void ApproveOrRejectOrder(bool approved)
+        public void ApproveOrReject(bool approved)
+       
+
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
