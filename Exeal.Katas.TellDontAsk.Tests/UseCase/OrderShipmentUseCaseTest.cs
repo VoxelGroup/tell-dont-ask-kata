@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exeal.Katas.TellDontAsk.Domain;
 using Exeal.Katas.TellDontAsk.Exception;
 using Exeal.Katas.TellDontAsk.Tests.Doubles;
@@ -24,9 +25,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void shipApprovedOrder()
         {
-            Order initialOrder = new Order();
-            initialOrder.Id = 1;
-            initialOrder.Status = OrderStatus.Approved;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Approved, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderShipmentRequest request = new OrderShipmentRequest();
@@ -41,9 +40,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void createdOrdersCannotBeShipped()
         {
-            Order initialOrder = new Order();
-            initialOrder.Id = 1;
-            initialOrder.Status = OrderStatus.Created;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Created, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderShipmentRequest request = new OrderShipmentRequest();
@@ -59,9 +56,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void rejectedOrdersCannotBeShipped()
         {
-            Order initialOrder = new Order();
-            initialOrder.Id = 1;
-            initialOrder.Status = OrderStatus.Rejected;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Rejected, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderShipmentRequest request = new OrderShipmentRequest();
@@ -77,9 +72,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void shippedOrdersCannotBeShippedAgain()
         {
-            Order initialOrder = new Order();
-            initialOrder.Id = 1;
-            initialOrder.Status = OrderStatus.Shipped;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Shipped, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderShipmentRequest request = new OrderShipmentRequest();

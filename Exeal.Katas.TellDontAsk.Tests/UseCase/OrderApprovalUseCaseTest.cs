@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Exeal.Katas.TellDontAsk.Domain;
 using Exeal.Katas.TellDontAsk.Exception;
 using Exeal.Katas.TellDontAsk.Tests.Doubles;
@@ -22,9 +23,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void ApprovedExistingOrder()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Created;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Created, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();
@@ -40,9 +39,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void RejectedExistingOrder()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Created;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Created, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();
@@ -58,9 +55,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void CannotApproveRejectedOrder()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Rejected;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Rejected, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();
@@ -76,9 +71,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void CannotRejectApprovedOrder()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Approved;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Approved, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();
@@ -94,9 +87,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void ShippedOrdersCannotBeApproved()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Shipped;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Shipped, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();
@@ -112,9 +103,7 @@ namespace Exeal.Katas.TellDontAsk.Tests.UseCase
         [Fact]
         public void ShippedOrdersCannotBeRejected()
         {
-            Order initialOrder = new Order();
-            initialOrder.Status = OrderStatus.Shipped;
-            initialOrder.Id = 1;
+            Order initialOrder = new Order(0M, null, new List<OrderItem>(), 0M, OrderStatus.Shipped, 1);
             orderRepository.AddOrder(initialOrder);
 
             OrderApprovalRequest request = new OrderApprovalRequest();

@@ -19,38 +19,27 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(SellItemsRequest request)
         {
-            Order order = new Order();
-            order.Status = OrderStatus.Created;
-            order.Items = new List<OrderItem>();
-            order.Currency = "EUR";
-            order.Total = 0M;
-            order.Tax = 0M;
+            var order = new Order(0M, "EUR", new List<OrderItem>(), 0M, OrderStatus.Created);
 
-            foreach (SellItemRequest itemRequest in request.Requests)
+            foreach (var itemRequest in request.Requests)
             {
-                Product product = productCatalog.GetByName(itemRequest.ProductName);
+                var product = productCatalog.GetByName(itemRequest.ProductName);
 
                 if (product == null)
                 {
                     throw new UnknownProductException();
                 }
-                else
-                {
-                    decimal unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
-                    decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
-                    decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
-                    decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.Product = product;
-                    orderItem.Quantity = itemRequest.Quantity;
-                    orderItem.Tax = taxAmount;
-                    orderItem.TaxedAmount = taxedAmount;
-                    order.Items.Add(orderItem);
+                var unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
+                var unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
+                var taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
+                var taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
-                    order.Total = order.Total + taxedAmount;
-                    order.Tax = order.Tax + taxAmount;
-                }
+                var orderItem = new OrderItem(product, itemRequest.Quantity, taxedAmount, taxAmount);
+                order.AddItem(orderItem);
+
+                order.CalculateTotal(taxedAmount);
+                order.CalculateTax(taxAmount);
             }
 
             orderRepository.Save(order);
