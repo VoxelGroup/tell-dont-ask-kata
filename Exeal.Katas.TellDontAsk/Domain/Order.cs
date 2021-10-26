@@ -13,24 +13,24 @@ namespace Exeal.Katas.TellDontAsk.Domain
         public OrderStatus Status { get; set; }
         public int Id { get; set; }
 
-        public void ApproveOrRejectOrder(OrderApprovalRequest request)
+        public void ApproveOrRejectOrder(bool approved)
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
                 throw new ShippedOrdersCannotBeChangedException();
             }
 
-            if (request.Approved && Status.Equals(OrderStatus.Rejected))
+            if (approved && Status.Equals(OrderStatus.Rejected))
             {
                 throw new RejectedOrderCannotBeApprovedException();
             }
 
-            if (!request.Approved && Status.Equals(OrderStatus.Approved))
+            if (!approved && Status.Equals(OrderStatus.Approved))
             {
                 throw new ApprovedOrderCannotBeRejectedException();
             }
 
-            Status = request.Approved ? OrderStatus.Approved : OrderStatus.Rejected;
+            Status = approved ? OrderStatus.Approved : OrderStatus.Rejected;
         }
     }
 }
