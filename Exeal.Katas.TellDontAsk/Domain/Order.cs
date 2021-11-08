@@ -15,6 +15,10 @@ namespace Exeal.Katas.TellDontAsk.Domain
 
         public Order()
         {
+            Items = new List<OrderItem>();
+            Currency = "EUR";
+            Total = 0M;
+            Tax = 0M;
             Status = OrderStatus.Created;
         }
 
