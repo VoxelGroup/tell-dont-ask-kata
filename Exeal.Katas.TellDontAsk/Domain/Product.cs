@@ -1,4 +1,5 @@
 ﻿using System;
+using Exeal.Katas.TellDontAsk.UseCase;
 
 namespace Exeal.Katas.TellDontAsk.Domain
 {
@@ -10,6 +11,11 @@ namespace Exeal.Katas.TellDontAsk.Domain
 
         public decimal UnitaryTax => Math.Round(Price / 100M * Category.TaxPercentage, 2,MidpointRounding.AwayFromZero);
 
-        public decimal UnitaryTaxedAmount => Math.Round(Price + UnitaryTax, 2, MidpointRounding.AwayFromZero);
+        private decimal UnitaryTaxedAmount => Math.Round(Price + UnitaryTax, 2, MidpointRounding.AwayFromZero);
+
+        public decimal TaxedAmount(int quantity)
+        {
+            return Math.Round(UnitaryTaxedAmount * quantity, 2, MidpointRounding.AwayFromZero);
+        }
     }
 }

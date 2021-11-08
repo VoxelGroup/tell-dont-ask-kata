@@ -33,7 +33,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 }
                 else
                 {
-                    decimal taxedAmount = Math.Round(product.UnitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
+                    var taxedAmount = product.TaxedAmount(itemRequest.Quantity);
                     decimal taxAmount = Math.Round(product.UnitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
                     OrderItem orderItem = new OrderItem();
