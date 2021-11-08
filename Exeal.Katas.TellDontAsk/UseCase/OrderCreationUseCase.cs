@@ -17,11 +17,9 @@ namespace Exeal.Katas.TellDontAsk.UseCase
         public void Run(SellItemsRequest request)
         {
             var order = new Order();
-            
             foreach (var itemRequest in request.Requests)
             {
                 var product = productCatalog.GetByName(itemRequest.ProductName);
-
                 order.AddItem(product, itemRequest.Quantity);
             }
 
