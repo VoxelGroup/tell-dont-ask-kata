@@ -1,7 +1,6 @@
 ﻿using Exeal.Katas.TellDontAsk.Exception;
-using Exeal.Katas.TellDontAsk.UseCase;
-using System.Collections.Generic;
 using Exeal.Katas.TellDontAsk.Service;
+using System.Collections.Generic;
 
 namespace Exeal.Katas.TellDontAsk.Domain
 {
@@ -45,23 +44,12 @@ namespace Exeal.Katas.TellDontAsk.Domain
 
         public void AddItem(Product product, int quantity)
         {
-            //if (product == null)
-            //{
-            //    throw new UnknownProductException();
-            //}
-
-            //if (quantity <= 0)
-            //{
-            //    throw new InvalidQuantityException();
-            //}
-
             var orderItem = new OrderItem(product, quantity);
+            
+            Items.Add(orderItem); // OJO, temporal coupling
 
-
-            Items.Add(orderItem);
-
-            Total = Total + orderItem.TaxedAmount;
-            Tax = Tax + orderItem.Tax;
+            Total += orderItem.TaxedAmount;
+            Tax += orderItem.Tax;
         }
 
         public void Ship(ShipmentService shipmentService)
