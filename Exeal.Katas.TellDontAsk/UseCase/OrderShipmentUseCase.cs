@@ -18,21 +18,8 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(OrderShipmentRequest request)
         {
-            Order order = orderRepository.GetById(request.OrderId);
-
-            if (order.Status.Equals(OrderStatus.Created) || order.Status.Equals(OrderStatus.Rejected))
-            {
-                throw new OrderCannotBeShippedException();
-            }
-
-            if (order.Status.Equals(OrderStatus.Shipped))
-            {
-                throw new OrderCannotBeShippedTwiceException();
-            }
-
-            shipmentService.Ship(order);
-
-            order.Status = OrderStatus.Shipped;
+            var order = orderRepository.GetById(request.OrderId);
+            order.Ship(shipmentService);
             orderRepository.Save(order);
         }
     }

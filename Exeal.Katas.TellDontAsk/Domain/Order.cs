@@ -1,6 +1,7 @@
 ﻿using Exeal.Katas.TellDontAsk.Exception;
 using Exeal.Katas.TellDontAsk.UseCase;
 using System.Collections.Generic;
+using Exeal.Katas.TellDontAsk.Service;
 
 namespace Exeal.Katas.TellDontAsk.Domain
 {
@@ -61,6 +62,23 @@ namespace Exeal.Katas.TellDontAsk.Domain
 
             Total = Total + orderItem.TaxedAmount;
             Tax = Tax + orderItem.Tax;
+        }
+
+        public void Ship(ShipmentService shipmentService)
+        {
+            if (Status.Equals(OrderStatus.Created) || Status.Equals(OrderStatus.Rejected))
+            {
+                throw new OrderCannotBeShippedException();
+            }
+
+            if (Status.Equals(OrderStatus.Shipped))
+            {
+                throw new OrderCannotBeShippedTwiceException();
+            }
+
+            shipmentService.Ship(this);
+
+            Status = OrderStatus.Shipped;
         }
     }
 }
