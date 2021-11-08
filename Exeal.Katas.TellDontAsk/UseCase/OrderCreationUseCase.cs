@@ -36,11 +36,9 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                     decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
                     decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
-                    OrderItem orderItem = new OrderItem(product,itemRequest.Quantity,taxAmount,taxedAmount);
-                    order.Items.Add(orderItem);
+                    OrderItem orderItem = new OrderItem(product,itemRequest.Quantity,taxedAmount,taxAmount);
 
-                    order.Total = order.Total + taxedAmount;
-                    order.Tax = order.Tax + taxAmount;
+                    order.AddItem(orderItem);
                 }
             }
 

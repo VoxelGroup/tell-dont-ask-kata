@@ -41,5 +41,13 @@ namespace Exeal.Katas.TellDontAsk.Domain
 
             Status = request.Approved ? OrderStatus.Approved : OrderStatus.Rejected;
         }
+
+        public void AddItem(OrderItem item)
+        {
+            Items.Add(item);
+
+            Total += item.TaxedAmount;
+            Tax += item.Tax;
+        }
     }
 }
