@@ -19,7 +19,10 @@ namespace Exeal.Katas.TellDontAsk.UseCase
         public void Run(OrderShipmentRequest request)
         {
             var order = orderRepository.GetById(request.OrderId);
-            order.Ship(shipmentService);
+            order.Shipped();
+
+            // OJO We choose "Domain Purity" over "Domain Completeness"
+            shipmentService.Ship(order);
             orderRepository.Save(order);
         }
     }

@@ -52,7 +52,7 @@ namespace Exeal.Katas.TellDontAsk.Domain
             Tax += orderItem.Tax;
         }
 
-        public void Ship(ShipmentService shipmentService)
+        public void Shipped()
         {
             if (Status.Equals(OrderStatus.Created) || Status.Equals(OrderStatus.Rejected))
             {
@@ -63,8 +63,6 @@ namespace Exeal.Katas.TellDontAsk.Domain
             {
                 throw new OrderCannotBeShippedTwiceException();
             }
-
-            shipmentService.Ship(this);
 
             Status = OrderStatus.Shipped;
         }
