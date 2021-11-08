@@ -21,7 +21,6 @@ namespace Exeal.Katas.TellDontAsk.UseCase
         {
             Order order = new Order();
             order.Items = new List<OrderItem>();
-            order.Currency = "EUR";
             order.Total = 0M;
             order.Tax = 0M;
 
