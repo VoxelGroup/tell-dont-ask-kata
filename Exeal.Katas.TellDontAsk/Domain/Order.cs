@@ -22,24 +22,24 @@ namespace Exeal.Katas.TellDontAsk.Domain
             Tax = 0M;
         }
 
-        public void ApproveOrRejectOrder(OrderApprovalRequest request)
+        public void ApproveOrReject(bool approved)
         {
             if (Status.Equals(OrderStatus.Shipped))
             {
                 throw new ShippedOrdersCannotBeChangedException();
             }
 
-            if (request.Approved && Status.Equals(OrderStatus.Rejected))
+            if (approved && Status.Equals(OrderStatus.Rejected))
             {
                 throw new RejectedOrderCannotBeApprovedException();
             }
 
-            if (!request.Approved && Status.Equals(OrderStatus.Approved))
+            if (!approved && Status.Equals(OrderStatus.Approved))
             {
                 throw new ApprovedOrderCannotBeRejectedException();
             }
 
-            Status = request.Approved ? OrderStatus.Approved : OrderStatus.Rejected;
+            Status = approved ? OrderStatus.Approved : OrderStatus.Rejected;
         }
 
         public void AddItem(Product product, int quantity)

@@ -1,6 +1,4 @@
-﻿using Exeal.Katas.TellDontAsk.Domain;
-using Exeal.Katas.TellDontAsk.Exception;
-using Exeal.Katas.TellDontAsk.Repository;
+﻿using Exeal.Katas.TellDontAsk.Repository;
 
 namespace Exeal.Katas.TellDontAsk.UseCase
 {
@@ -15,9 +13,8 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(OrderApprovalRequest request)
         {
-            Order order = orderRepository.GetById(request.OrderId);
-
-            order.ApproveOrRejectOrder(request);
+            var order = orderRepository.GetById(request.OrderId);
+            order.ApproveOrReject(request.Approved);
             orderRepository.Save(order);
         }
     }
