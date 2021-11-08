@@ -29,14 +29,8 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 {
                     throw new UnknownProductException();
                 }
-                else
-                {
-                    
 
-                    OrderItem orderItem = new OrderItem(product,itemRequest.Quantity);
-
-                    order.AddItem(orderItem);
-                }
+                order.AddItem(new OrderItem(product,itemRequest.Quantity));
             }
 
             orderRepository.Save(order);
