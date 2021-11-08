@@ -8,7 +8,7 @@ namespace Exeal.Katas.TellDontAsk.Domain
     {
         public decimal Total { get; set; }
         public string Currency { get; set; }
-        public List<OrderItem> Items { get; set; }
+        public List<OrderItem> Items { get;}
         public decimal Tax { get; set; }
         public OrderStatus Status { get; set; }
         public int Id { get; set; }
@@ -38,6 +38,11 @@ namespace Exeal.Katas.TellDontAsk.Domain
             }
 
             Status = request.Approved ? OrderStatus.Approved : OrderStatus.Rejected;
+        }
+
+        public void AddItem(OrderItem orderItem)
+        {
+            Items.Add(orderItem);
         }
     }
 }

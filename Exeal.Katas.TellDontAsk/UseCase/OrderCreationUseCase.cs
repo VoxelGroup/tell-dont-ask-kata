@@ -37,7 +37,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                     var taxAmount = product.TaxAmount(itemRequest.Quantity);
 
                     OrderItem orderItem = new OrderItem(product, itemRequest.Quantity);
-                    order.Items.Add(orderItem);
+                    order.AddItem(orderItem);
 
                     order.Total = order.Total + taxedAmount;
                     order.Tax = order.Tax + taxAmount;
