@@ -17,6 +17,7 @@ namespace Exeal.Katas.TellDontAsk.Domain
         {
             Status = OrderStatus.Created;
             Currency = "EUR";
+            Items = new List<OrderItem>();
         }
 
         public void ApproveOrRejectOrder(OrderApprovalRequest request)
