@@ -37,12 +37,8 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
                 // TODO: to constructor with parameters
-                OrderItem orderItem = new OrderItem();
-                orderItem.Product = product;
-                orderItem.Quantity = itemRequest.Quantity;
-                orderItem.Tax = taxAmount;
-                orderItem.TaxedAmount = taxedAmount;
-                    
+                OrderItem orderItem = new OrderItem(product, itemRequest.Quantity, taxAmount, taxedAmount);
+
                 // TODO: extract AddItem() method
                 order.Items.Add(orderItem);
                 order.Total += orderItem.TaxedAmount;
