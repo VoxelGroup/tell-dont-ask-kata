@@ -19,7 +19,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(SellItemsRequest request)
         {
-            Order order = new Order();
+            Order order = new Order(); // TODO: to constructor with parameters
             order.Status = OrderStatus.Created;
             order.Items = new List<OrderItem>();
             order.Currency = "EUR";
@@ -36,20 +36,23 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 }
                 else
                 {
+                    // TODO: move to Product
                     decimal unitaryTax = Math.Round(product.Price / 100M * product.Category.TaxPercentage, 2, MidpointRounding.AwayFromZero);
                     decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
                     decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
                     decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
 
+                    // TODO: to constructor with parameters
                     OrderItem orderItem = new OrderItem();
                     orderItem.Product = product;
                     orderItem.Quantity = itemRequest.Quantity;
                     orderItem.Tax = taxAmount;
                     orderItem.TaxedAmount = taxedAmount;
+                    
+                    // TODO: extract AddItem() method
                     order.Items.Add(orderItem);
-
-                    order.Total = order.Total + taxedAmount;
-                    order.Tax = order.Tax + taxAmount;
+                    order.Total += orderItem.TaxedAmount;
+                    order.Tax += orderItem.Tax;
                 }
             }
 
