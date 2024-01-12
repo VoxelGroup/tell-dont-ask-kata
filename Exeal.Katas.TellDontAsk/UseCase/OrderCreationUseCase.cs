@@ -33,11 +33,12 @@ namespace Exeal.Katas.TellDontAsk.UseCase
                 // TODO: move to Product
                 var unitaryTax = product.GetUnitaryTax();
                 decimal unitaryTaxedAmount = Math.Round(product.Price + unitaryTax, 2, MidpointRounding.AwayFromZero);
-                decimal taxedAmount = Math.Round(unitaryTaxedAmount * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
-                decimal taxAmount = Math.Round(unitaryTax * itemRequest.Quantity, 2, MidpointRounding.AwayFromZero);
+                var quantity = itemRequest.Quantity;
+                decimal taxedAmount = Math.Round(unitaryTaxedAmount * quantity, 2, MidpointRounding.AwayFromZero);
+                decimal taxAmount = Math.Round(unitaryTax * quantity, 2, MidpointRounding.AwayFromZero);
 
                 // TODO: to constructor with parameters
-                OrderItem orderItem = new OrderItem(product, itemRequest.Quantity, taxAmount, taxedAmount);
+                OrderItem orderItem = new OrderItem(product, quantity, taxAmount, taxedAmount);
 
                 // TODO: extract AddItem() method
                 order.Items.Add(orderItem);
