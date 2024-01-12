@@ -19,12 +19,7 @@ namespace Exeal.Katas.TellDontAsk.UseCase
 
         public void Run(SellItemsRequest request)
         {
-            Order order = new Order(); // TODO: to constructor with parameters
-            order.Status = OrderStatus.Created;
-            order.Items = new List<OrderItem>();
-            order.Currency = "EUR";
-            order.Total = 0M;
-            order.Tax = 0M;
+            var order = new Order();
 
             foreach (SellItemRequest itemRequest in request.Requests)
             {
